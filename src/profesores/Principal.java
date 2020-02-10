@@ -18,6 +18,10 @@ public class Principal extends Persona {
 		Profesor.setCurso(curso);
 		System.out.println();
 		
+		Persona p1= new Persona();
+		p1.nuevaPersona();
+		System.out.println(p1.toString());
+		
 		boolean correcto= false;
 		do {
 			System.out.print("Importe Horas Extra: ");
@@ -70,7 +74,7 @@ public class Principal extends Persona {
 			int i;
 			switch(opcion) {
 			case 1: // alta profesor
-				Profesor p= new Profesor();
+				Profesor p= (Profesor) new Persona();
 				p.nuevoProfesor();
 				lista.add(p);
 				break;

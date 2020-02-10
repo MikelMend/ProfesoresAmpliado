@@ -15,7 +15,7 @@ public class Profesor extends Persona {
 		
 	}
 	public Profesor(String nombre,String dni,double sueldoBase, int[] horasExtras, double tipoIRPF, String cuentaIBAN) {
-		super();
+		super(nombre,dni);
 		this.sueldoBase = sueldoBase;
 		this.horasExtras = horasExtras;
 		this.tipoIRPF = tipoIRPF;
@@ -100,10 +100,7 @@ public class Profesor extends Persona {
 		String dni,ssueldoBase,stipoIRPF;
 		boolean correcto= false;
 		do {
-			System.out.print("Profesor: ");
-			nombre= sc.nextLine();
-			System.out.print("DNI: ");
-			dni = sc.nextLine();
+			super.nuevaPersona();
 			System.out.print("Cuenta IBAN: ");
 			cuentaIBAN = sc.nextLine();
 			System.out.print("Sueldo Base: ");
@@ -112,8 +109,8 @@ public class Profesor extends Persona {
 			stipoIRPF = sc.nextLine();
 			
 			try {
-				verificaDNI(dni);
-				Cuenta.filtroCuenta(cuentaIBAN);
+				verificaDNI(this.dni);
+				Cuenta.filtroCuenta(this.cuentaIBAN);
 				try {
 					int posicion= ssueldoBase.indexOf(',');
 					if(posicion != -1) {
@@ -147,15 +144,15 @@ public class Profesor extends Persona {
 		String resultado="";
 		StringBuilder sb= new StringBuilder();
 		sb.append("Nombre: ");
-		sb.append(nombre);
+		sb.append(this.nombre);
 		sb.append("DNI :");
-		sb.append(dni);
+		sb.append(this.dni);
 		sb.append("Cuenta IBAN: ");
-		sb.append(cuentaIBAN);
+		sb.append(this.cuentaIBAN);
 		sb.append("Sueldo Base: ");
-		sb.append(sueldoBase);
+		sb.append(this.sueldoBase);
 		sb.append("Tipo de IRPF :");
-		sb.append(tipoIRPF);
+		sb.append(this.tipoIRPF);
 		resultado= sb.toString();
 		
 		return resultado;
@@ -166,9 +163,9 @@ public class Profesor extends Persona {
 		String nombreMes[]= {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Nomviembre","Diciembre"};
 		StringBuilder sb= new StringBuilder();
 		sb.append("Nombre: ");
-		sb.append(nombre);
+		sb.append(this.nombre);
 		sb.append("DNI :");
-		sb.append(dni);
+		sb.append(this.dni);
 		sb.append("Cuenta IBAN: ");
 		sb.append(cuentaIBAN);
 		sb.append("Curso: ");

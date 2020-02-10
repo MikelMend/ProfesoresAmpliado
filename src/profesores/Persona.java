@@ -17,6 +17,11 @@ public class Persona {
 	public Persona() {
 		
 	}
+	public Persona(String nombre, String dni) {
+		this.nombre=nombre;
+		this.dni=dni;
+		
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -64,21 +69,28 @@ public class Persona {
 	public void nuevaPersona() {
 		boolean correcto = false;
 		Scanner sc= new Scanner(System.in);
-		String nombre,apellidos,calle,codigoPostal,ciudad,dni,fechaNacimiento;
-		System.out.print("Nombre :");
-		nombre = sc.nextLine();
-		System.out.print("Apellidos:");
-		apellidos = sc.nextLine();
-		System.out.print("Calle: ");
-		calle = sc.nextLine();
-		System.out.print("Codigo Postal: ");
-		codigoPostal = sc.nextLine();
-		System.out.print("Ciudad :");
-		ciudad= sc.nextLine();
-		System.out.print("Dni: ");
-		dni = sc.nextLine();
+		String pnombre,papellidos,pcalle,pcodigoPostal,pciudad,pdni,pfechaNacimiento;
+		System.out.println("Nombre :");
+		pnombre = sc.nextLine();
+		setNombre(pnombre);
+		System.out.println("Apellidos:");
+		papellidos = sc.nextLine();
+		setApellidos(papellidos);
+		System.out.println("Calle: ");
+		pcalle = sc.nextLine();
+		setCalle(pcalle);
+		System.out.println("Codigo Postal: ");
+		pcodigoPostal = sc.nextLine();
+		setCodigoPostal(pcodigoPostal);
+		System.out.println("Ciudad :");
+		pciudad= sc.nextLine();
+		setCiudad(pciudad);
+		System.out.println("Dni: ");
+		pdni = sc.nextLine();
+		setDni(pdni);
 		System.out.println("Fecha Nacimiento (DDMMAAAA) :");
-		fechaNacimiento = sc.nextLine();
+		pfechaNacimiento = sc.nextLine();
+		setFechaNacimiento(pfechaNacimiento);
 	
 		
 		try {
