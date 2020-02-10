@@ -139,7 +139,7 @@ public class Profesor extends Persona {
 	}
 	
 	
-
+@Override
 	public String toString() {
 		String resultado="";
 		StringBuilder sb= new StringBuilder();

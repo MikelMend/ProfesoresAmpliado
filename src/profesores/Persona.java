@@ -102,9 +102,10 @@ public class Persona {
 			sc.nextLine();
 			}while(!correcto);
 		}
+	@Override
 	public String toString() {
 		String resultado="";
-		StringBuilder sb= new StringBuilder();
+		StringBuilder sb= new StringBuilder("Datos Personales: ");
 		sb.append("Nombre: ");
 		sb.append(nombre);
 		sb.append("Apellidos: ");
