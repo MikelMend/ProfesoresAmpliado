@@ -17,9 +17,14 @@ public class Persona {
 	public Persona() {
 		
 	}
-	public Persona(String nombre, String dni) {
+	public Persona(String nombre, String dni, String apellidos, String calle, String codigoPostal, String ciudad, String fechaNacimiento) {
 		this.nombre=nombre;
 		this.dni=dni;
+		this.apellidos= apellidos;
+		this.calle= calle;
+		this.codigoPostal= codigoPostal;
+		this.ciudad= ciudad;
+		this.fechaNacimiento=fechaNacimiento;
 		
 	}
 	

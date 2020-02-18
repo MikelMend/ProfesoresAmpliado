@@ -1,43 +1,34 @@
 package profesores;
 
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.Iterator;
+import java.util.InputMismatchException;
+
 
 public class Profesor extends Persona {
-	private static String curso;
-	private static double pagoPorHoraExtra; // es un atributo de clase
+
 	private double sueldoBase;
 	private int[] horasExtras;
 	private double tipoIRPF;
 	private String cuentaIBAN;
+	private TreeMap<String, String> tmAsignaturas;
 	
 	// constructor de profesor por defecto
 	public Profesor() {
 		
 	}
 	public Profesor(String nombre,String dni,double sueldoBase, int[] horasExtras, double tipoIRPF, String cuentaIBAN) {
-		super(nombre,dni);
+		super(nombre,dni,apellidos,calle,codigoPostal,ciudad,fechaNacimiento);
 		this.sueldoBase = sueldoBase;
-		this.horasExtras = horasExtras;
+		this.horasExtras = new int[12];
 		this.tipoIRPF = tipoIRPF;
 		this.cuentaIBAN = cuentaIBAN;
+		tmAsignaturas = new TreeMap<String,String>();
 	}
 	
 	// creamos los metodos getters y setters
-	public static String getCurso() {
-		return curso;
-	}
 
-	public static void setCurso(String curso) {
-		Profesor.curso = curso;
-	}
-
-	public static double getPagoPorHoraExtra() {
-		return pagoPorHoraExtra;
-	}
-
-	public static void setPagoPorHoraExtra(double pagoPorHoraExtra) {
-		Profesor.pagoPorHoraExtra = pagoPorHoraExtra;
-	}
 
 	public double getSueldoBase() {
 		return sueldoBase;
@@ -73,7 +64,7 @@ public class Profesor extends Persona {
 	public double calcularImporteHorasExtras(int mes) {
 		mes=mes-1;
 		
-		return horasExtras[mes]*pagoPorHoraExtra;
+		return horasExtras[mes];
 		
 	}
 	
@@ -93,20 +84,64 @@ public class Profesor extends Persona {
 		
 	}
 	
+	// en este punto pedimos las asignaturas de un profesor.
+	
+	public void asignaturasProfesor() {
+		Scanner sc= new Scanner(System.in);
+		String key="";
+		System.out.println("Profesor: "+this.getApellidos()+ ", "+this.getNombre());
+		// muestra las asignaturas que imparte el profesor.
+		int opcion=0;
+		do {
+			System.out.println("");
+			if(this.tmAsignaturas.isEmpty()==false) {
+			Iterator it=this.tmAsignaturas.keySet().iterator();
+			System.out.println("ASIGNATURAS IMPARTIDASA");
+			while(it.hasNext()) {
+				key= (String) it.next();// codigo de curso+asignatura
+				String nombre= this.tmAsignaturas.get(key);// nombre de la asignatura
+				System.out.println(key + ": "+nombre);
+			}
+		}
+			System.out.println("");
+			System.out.println("1. Añadir Asignatura.");
+			System.out.println("2. Quitar Asignatura.");
+			System.out.println("0. Salir.");
+			boolean correcto= false;
+			do {
+				try {
+					System.out.print("Opción seleccionada: ");
+					opcion= sc.nextInt();
+					correcto=true;
+				}catch(InputMismatchException e) {
+					System.out.print("opción no admitida");
+					sc.hasNextLine();
+				}catch(Exception e) {
+			
+			
+			
+			
+		}while(asignatura== true);
+		}
+		
+	}
+	
 	// aquí pedimos los datos de un nuevo profesor para meterlo despues en el array
 	
 	public void nuevoProfesor() {
 		Scanner sc= new Scanner(System.in);
-		String dni,ssueldoBase,stipoIRPF;
+		String ssueldoBase,stipoIRPF;
+		super.nuevaPersona();
 		boolean correcto= false;
 		do {
-			super.nuevaPersona();
+			
 			System.out.print("Cuenta IBAN: ");
 			cuentaIBAN = sc.nextLine();
 			System.out.print("Sueldo Base: ");
 			ssueldoBase = sc.nextLine();
 			System.out.print("Tipo de IRPF: ");
 			stipoIRPF = sc.nextLine();
+			
 			
 			try {
 				verificaDNI(this.dni);
@@ -133,10 +168,13 @@ public class Profesor extends Persona {
 					System.out.println("error "+ e.getMessage());
 					sc.nextLine();
 			}
+			horasExtras= new int[12]; // la iniciamos vacía
+			TMAsignaturas= new TreeMap<String,String>();
 			
 		}while(!correcto);
 		
 	}
+	
 	
 	
 @Override
@@ -168,8 +206,6 @@ public class Profesor extends Persona {
 		sb.append(this.dni);
 		sb.append("Cuenta IBAN: ");
 		sb.append(cuentaIBAN);
-		sb.append("Curso: ");
-		sb.append(curso);
 		sb.append("Nomina mes: ");
 		sb.append(nombreMes[mes]);
 		sb.append("Sueldo Base: ");

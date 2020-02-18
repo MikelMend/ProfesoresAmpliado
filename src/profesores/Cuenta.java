@@ -4,38 +4,11 @@ import java.math.BigInteger;
 import java.util.TreeMap;
 
 public class Cuenta {
-	private double saldo;
-	private String numeroCuenta;
-	private String cifTitular;
-	
+
 	public Cuenta() {
 		
 	}
 
-	public double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
-	public String getNumeroCuenta() {
-		return numeroCuenta;
-	}
-
-	public void setNumeroCuenta(String numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
-	}
-
-	public String getCifTitular() {
-		return cifTitular;
-	}
-
-	public void setCifTitular(String cifTitular) {
-		this.cifTitular = cifTitular;
-	}
-	
 	public static void filtroCuenta(String numeroCuenta) throws Exception{
 		int factores[]= {1,2,4,8,5,10,9,7,3,6};
 		

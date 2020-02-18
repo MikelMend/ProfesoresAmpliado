@@ -5,9 +5,49 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal extends Persona {
+	public double saldo;
+	public String numeroCuenta;
+	public String cifTitular;
+	private static String curso;
+	
+	
 	static Scanner sc= new Scanner(System.in);
 	static ArrayList<Profesor> lista = new ArrayList<>();
 	static ArrayList<Persona> listaPersona= new ArrayList<>();
+	
+	
+	public static String getCurso() {
+		return curso;
+	}
+
+	public static void setCurso(String curso) {
+		Principal.curso = curso;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public String getCifTitular() {
+		return cifTitular;
+	}
+
+	public void setCifTitular(String cifTitular) {
+		this.cifTitular = cifTitular;
+	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
