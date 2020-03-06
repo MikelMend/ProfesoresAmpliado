@@ -1,42 +1,90 @@
 package profesores;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class TablasCursos {
     static void cargaCursos(TreeMap<String, String> tmCC){
-        tmCC.put("1E", "SMR Mañana");
-        tmCC.put("1G", "SMR Tarde");
-        tmCC.put("1F", "SMR Tarde");
-        tmCC.put("1W", "DAW Tarde");
-        tmCC.put("1S", "DAW Mañana");
+    	FileReader file = null;
+        String sDatos,sCodCurso = null, sDesCurso;
+        
+        try(BufferedReader lectura = new BufferedReader(file = new FileReader("C:\\Users\\MikelPort\\Desktop\\ProyectoCentro\\cursos.txt"))) {
+        	
+            sDatos = lectura.readLine();
+            while (sDatos != null) {
+                if (sDatos != null) sDatos = sDatos.toUpperCase();
+                
+                sCodCurso = sDatos.substring(0, 2);
+                sDesCurso = sDatos.substring(2, sDatos.length());
+                
+                tmCC.put(sCodCurso,sDesCurso);
+                
+               System.out.println(sCodCurso + " " + sDesCurso);
+                
+                sDatos = lectura.readLine();
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
     static void cargaCursosAsignaturas(TreeMap<String, String> tmCCASIGNA){
-        tmCCASIGNA.put("1EREDES", "Redes de Área Local");
-        tmCCASIGNA.put("1EOFIMA", "Ofimática");
-        tmCCASIGNA.put("1ESISOP", "Sistemas Operativos");
-        tmCCASIGNA.put("1EFOL", "Formación y Orientación Laboral");
-        tmCCASIGNA.put("1EINGLES", "Inglés");
-        tmCCASIGNA.put("1GREDES", "Redes de Área Local");
-        tmCCASIGNA.put("1GOFIMA", "Ofimática");
-        tmCCASIGNA.put("1GSISOP", "Sistemas Operativos");
-        tmCCASIGNA.put("1GFOL", "Formación y Orientación Laboral");
-        tmCCASIGNA.put("1FREDES", "Redes de Área Local");
-        tmCCASIGNA.put("1FOFIMA", "Ofimática");
-        tmCCASIGNA.put("1FSISOP", "Sistemas Operativos");
-        tmCCASIGNA.put("1FFOL", "Formación y Orientación Laboral");
-        tmCCASIGNA.put("1FINGLES", "Inglés");
-        tmCCASIGNA.put("1WPROGRAM", "Programación");
-        tmCCASIGNA.put("1WLENGMAR", "Lenguajes de Marcas");
-        tmCCASIGNA.put("1WENTORNOS", "Entornos de Desarrollo");
-        tmCCASIGNA.put("1WSISOPE", "Sistemas Operativos");
-        tmCCASIGNA.put("1WFOL", "Formación y Orientación Laboral");
-        tmCCASIGNA.put("1WINGLES", "Inlés");
-        tmCCASIGNA.put("1SPROGRAM", "Programación");
-        tmCCASIGNA.put("1SLENGMAR", "Lenguajes de Marcas");
-        tmCCASIGNA.put("1SENTORNOS", "Entornos de Desarrollo");
-        tmCCASIGNA.put("1SSISOPE", "Sistemas Operativos");
-        tmCCASIGNA.put("1SFOL", "Formación y Orientación Laboral");
-        tmCCASIGNA.put("1SINGLES", "Inlés");
+    	 FileReader file = null;
+         String cadena;
+         
+         
+         try(BufferedReader lectura = new BufferedReader(file = new FileReader("C:\\Users\\MikelPort\\Desktop\\ProyectoCentro\\cursosAsignaturas.txt"))) {
+             cadena= lectura.readLine();
+        	 for(int i = 0; cadena!=null; i++) {
+        		 String []datos;
+        		 datos= cadena.split(",");
+        		 System.out.println(datos[0]+" "+datos[1]);
+        		 tmCCASIGNA.put(datos[0],datos[1]);
+        		 cadena= lectura.readLine();
+        	 }
+         
+   
+    } catch (FileNotFoundException e) {
+		System.out.println("No se ha encontrado el fichero.");
+	} catch (IOException e) {
+		System.out.println(e.getMessage());
+	}
     }
-}
+    /*public static void pedirCurso() {
+    	String curso="";
+    	Scanner teclado= new Scanner(System.in);
+    	System.out.println("Introduce un curso");
+    	curso= teclado.nextLine();
+    	String cadena="";
+    	File ruta= new File("C:\\Users\\MikelPort\\Desktop\\ProyectoCentro\\centro.txt");
+    	
+    	try {
+    		Scanner sc= new Scanner(ruta);
+    		while(sc.hasNext()) {
+    			
+    			cadena= sc.nextLine();
+    			String	[] descripcion =cadena.split(",");
+    			
+    			if(descripcion[0]== curso) {
+    			System.out.println("El curso indicado es:" +descripcion[1]);
+    			}
+    			
+    		}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("El archivo no exite.");
+			e.printStackTrace();
+		}
+    }
+
+	 */
+ }
 
