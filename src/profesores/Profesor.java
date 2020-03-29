@@ -11,7 +11,9 @@ public class Profesor extends Persona{
     private int[] horasExtras;
     private double tipoIRPF;
     private String cuentaIBAN;
-    private TreeMap<String, String> tmAsignaturas;//TREEMAP DE LAS ASIGNATURAS IMPARTIDAS.
+    
+
+	private TreeMap<String, String> tmAsignaturas;//TREEMAP DE LAS ASIGNATURAS IMPARTIDAS.
 
     public Profesor() {}
     
@@ -24,7 +26,10 @@ public class Profesor extends Persona{
         this.cuentaIBAN = cuentaIBAN;
         this.tmAsignaturas = new TreeMap<String, String>();
     }
-// CREAMOS UNA FUNCION PARA CREAR PROFESORES.
+
+
+
+	// CREAMOS UNA FUNCION PARA CREAR PROFESORES.
     public void nuevoProfesor() throws Exception {
         Scanner sc = new Scanner(System.in);
         //LLAMAMOS A LA FUNCION DEL PADRE PIDEDATOS PARA COGER LOS ATRIBUTOS POR HERENCIA.
@@ -214,6 +219,23 @@ public class Profesor extends Persona{
     public void setTipoIRPF(double tipoIRPF) {
         this.tipoIRPF = tipoIRPF;
     }
+    
+    public String getCuentaIBAN() {
+		return cuentaIBAN;
+	}
+
+
+	public void setCuentaIBAN(String cuentaIBAN) {
+		this.cuentaIBAN = cuentaIBAN;
+	}
+	public TreeMap<String, String> getTmAsignaturas() {
+		return tmAsignaturas;
+	}
+
+
+	public void setTmAsignaturas(TreeMap<String, String> tmAsignaturas) {
+		this.tmAsignaturas = tmAsignaturas;
+	}
 
     //Calculo del importe de las horas extras por mes    
     private double calcularImporteHorasExtras(int mes) {

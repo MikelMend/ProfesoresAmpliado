@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
-public class Persona { 			//CREAMOS LOS ATRIBUTOS
+import java.io.Serializable;
+
+public class Persona implements Serializable { 			//CREAMOS LOS ATRIBUTOS
 	protected String nombre;
 	protected String apellidos;
 	protected String calle;

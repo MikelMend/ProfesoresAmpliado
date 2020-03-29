@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.TreeMap;
 
-public class Cuenta {
+public class Cuenta implements Serializable{
 
     private double saldo; // CREAMOS LOS ATRIBUTOS DE CUENTA.
 
@@ -193,72 +195,48 @@ public class Cuenta {
      */
     static void cargaEntidadesBancarias(TreeMap<String, String> tmEEEE){
     	FileReader file = null;
-        String sDatos,sCodEntidad = null, sDesEntidad;
+        String cadena;
         
-        try {
-            file = new FileReader("C:\\Users\\MikelPort\\Desktop\\ProyectoCentro\\entidades.txt");
-            BufferedReader lectura = new BufferedReader(file);
-            
-            sDatos = lectura.readLine();
-            while (sDatos != null) {
-                if (sDatos != null) sDatos = sDatos.toUpperCase();
-                
-                sCodEntidad = sDatos.substring(0, 4);
-                sDesEntidad = sDatos.substring(4, sDatos.length());
-                
-                tmEEEE.put(sCodEntidad,sDesEntidad);
-                
-//                System.out.println(sCodEntidad + " " + sDesEntidad);
-                
-                sDatos = lectura.readLine();
-            }
-        }
-        catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        finally {
-            try {
-                if (file != null) {
-                    file.close();
-                }
-            }
-            catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        } 
+        
+        try(BufferedReader lectura = new BufferedReader(file = new FileReader("C:\\ProyectoCentro\\entidades.txt"))) {
+            cadena= lectura.readLine();
+       	 for(int i = 0; cadena!=null; i++) {
+       		 String []datos;
+       		 datos= cadena.split(",");
+       		// System.out.println(datos[0]+" "+datos[1]);
+       		tmEEEE.put(datos[0],datos[1]);
+       		 cadena= lectura.readLine();
+       	 }
+        
+  
+   } catch (FileNotFoundException e) {
+		System.out.println("No se ha encontrado el fichero.");
+	} catch (IOException e) {
+		System.out.println(e.getMessage());
+	}
     }
     static void cargaSucursalesBancarias(TreeMap<String, String> tmEEEESSSS){
-    	FileReader file = null;
-        String sDatos,sCodSucursal = null, sDesSucursal;
+       	FileReader file = null;
+        String cadena;
         
-        try(BufferedReader lectura = new BufferedReader( file = new FileReader("C:\\Users\\MikelPort\\Desktop\\ProyectoCentro\\sucursales.txt"))) {
-          
-            
-            
-            sDatos = lectura.readLine();
-            while (sDatos != null) {
-                if (sDatos != null) sDatos = sDatos.toUpperCase();
-                
-                sCodSucursal = sDatos.substring(0, 8);
-                sDesSucursal = sDatos.substring(8, sDatos.length());
-                
-                tmEEEESSSS.put(sCodSucursal,sDesSucursal);
-                
-//                System.out.println(sCodSucursal+ " " + sDesSucursal);
-                
-                sDatos = lectura.readLine();
-            }
-        }
-        catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        } 
+        
+        try(BufferedReader lectura = new BufferedReader(file = new FileReader("C:\\ProyectoCentro\\sucursales.txt"))) {
+            cadena= lectura.readLine();
+       	 for(int i = 0; cadena!=null; i++) {
+       		 String []datos;
+       		 datos= cadena.split(",");
+       		// System.out.println(datos[0]+" "+datos[1]);
+       		tmEEEESSSS.put(datos[0],datos[1]);
+       		 cadena= lectura.readLine();
+       	 }
+        
+  
+   } catch (FileNotFoundException e) {
+		System.out.println("No se ha encontrado el fichero.");
+	} catch (IOException e) {
+		System.out.println(e.getMessage());
+	}
+    }
     
 
 

@@ -1,13 +1,16 @@
 package profesores;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class CentroEducativo {
-    private static String curso;
-    private static double pagoPorHoraExtra;
+	private static String curso;
+	private static double pagoPorHoraExtra;
     static TreeMap<String, Persona> lista = new TreeMap<String, Persona>(); // MAP CON PERSONAS
     static TreeMap<String, String> tmEEEE = new TreeMap<String, String>();//Map con entidades bancarias
     static TreeMap<String, String> tmEEEESSSS = new TreeMap<String, String>();//Map con sucursales bancarias
@@ -73,32 +76,24 @@ public class CentroEducativo {
     static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) throws Exception{
+    	try {
+    		TablasCursos.cargaGlobales();
+    	}catch(Exception e) {
+    		System.out.println("Carga globales no funciona.");
+    	}
+    	
         Cuenta.cargaEntidadesBancarias(tmEEEE); // SE CARGAN LOS TREEMAP
         Cuenta.cargaSucursalesBancarias(tmEEEESSSS);
         TablasCursos.cargaCursos(tmCC);
         TablasCursos.cargaCursosAsignaturas(tmCCASIGNA);
-        System.out.println("Curso: "); // SE ASIGNA EL CURSO
-        curso = sc.nextLine();
-        CentroEducativo.setCurso(curso);
+        
+     
+    
+        
+        
         System.out.println();
         boolean correcto = false;        
-       
-        do{
-            System.out.print("Importe Horas Extra: ");
-            String simporte = sc.nextLine(); // CREAMOS UN AUX DE IMPORTE EN STRING PARA COMPROBARLO
-            int posicion = simporte.indexOf(',');//si ha introducido , como separador lo cambia por punto
-            if(posicion != -1) {simporte=simporte.replace(',', '.');}
-            try{											// SI ES TRUE IMPORTE RECIBE EL VALOR DEL AUX PASADO A DOBLE
-                double importe=Double.parseDouble(simporte);
-                CentroEducativo.setPagoPorHoraExtra(importe); // SE AJUSTA EL IMPORTE POR HORAS EXTRAS
-                System.out.println();
-                correcto=true;
-            }catch (Exception e){
-                System.out.println("error en caracteres Importe Horas Extra");
-                sc.nextLine();
-            }    
-        }while(!correcto); // MIENTRAS SEA DISTINTO DE CORRECTO PERMANECE EN EL BUCLE
-        
+
         
         // OBJETOS CREADOS PARA PROBAR EL PROGRAMA.
         Profesor p = new Profesor(1500.0,10.0, "ES2400811152680006077615", "Nombre1", "Apellidos1","calle1","03202", 
@@ -106,17 +101,17 @@ public class CentroEducativo {
         String key = p.getApellidos() + ", " + p.getNombre();
         lista.put(key, p);
         
-        p = new Profesor(1200.0,10.0, "ES2400811152680006077615", "Nombre3", "Apellidos3","calle3","03300", 
+        p = new Profesor(1200.0,10.0, "ES2400811152680006077615", "Cristian", "Rubio","calle3","03300", 
                            "Cuenca", "45727569G", "19/10/1988"); 
         key = p.getApellidos() + ", " + p.getNombre();
         lista.put(key, p);
         
-        p = new Profesor(1500.0,10.0, "ES2400811152680006077615", "Nombre2", "Apellidos2","calle2","035555", 
+        p = new Profesor(1500.0,10.0, "ES2400811152680006077615", "Mikel", "Apellidos2","calle2","035555", 
                            "Alicante", "22222222J", "10/07/1979"); 
         key = p.getApellidos() + ", " + p.getNombre();
         lista.put(key, p);
         
-        p = new Profesor(1600.0,10.0, "ES2400811152680006077615", "Somaya", "Gonzalez","Plaza Castilla","38680", 
+        p = new Profesor(1600.0,10.0, "ES2400811152680006077615", "Susana", "Gonzalez","Plaza Castilla","38680", 
                            "Guia de Isora", "21309422z", "03/06/1979"); 
         
         key = p.getApellidos() + ", " + p.getNombre();
@@ -549,10 +544,11 @@ public class CentroEducativo {
                         profe.nuevoProfesor();	// LLAMAMOS A LA FUNCION PARA AÑADIR LOS DATOS A PROFESOR
                         key = p.getApellidos() + ", " + p.getNombre(); // SE CREA LA CLAVE CON LOS DATOS RECOGIDOS
                         // COMPRUEBA SI EN PERSONAS EXISTEN ESTOS DATOS, SI EXISTEN SALTA UNA EXEPCION
-                        if(lista.containsKey(key)) throw new Exception("Este nombre ya existe. No puedo grabarlo");
-                        lista.put(key, profe);	//AÑADE LOS DATOS RECOGIDOS Y EL OBJETO AL TREEMAP LISTA
-                    }catch(Exception e){
-                        System.out.println(e.getMessage());
+                        if(!lista.containsKey(key)) {
+                        	lista.put(key, profe);
+                        }
+                        }catch(Exception e){
+                        System.out.println("El profesor existe.");
                     }                    
                     break;
                 case 2:
@@ -780,6 +776,13 @@ public class CentroEducativo {
         default:
         	salirMenu=true;
         	opcion=0;
+        	try {
+        		FuncionesFicheros.GuardarDatosPersonas(lista);
+        		File rutaPersonas3 = new File("C:\\ProyectoCentro\\Personas3.txt");
+        		FuncionesFicheros.obtenerTreeMapDeArchivo(rutaPersonas3);
+        	}catch(IOException e) {
+        		System.out.println("Error!! " +e.getMessage());
+        	}
         	break;
         	}
         }while(!salirMenu|| opcion!=0);
