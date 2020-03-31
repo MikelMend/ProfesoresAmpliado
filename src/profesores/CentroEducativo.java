@@ -17,6 +17,9 @@ public class CentroEducativo {
     static TreeMap<String, String> tmCC = new TreeMap<String, String>();//Map con nombres de cursos
     static TreeMap<String, String> tmCCASIGNA = new TreeMap<String, String>();//Map con curso+asignatura
 
+    
+    
+	
     public static void setCurso(String curso) {
         CentroEducativo.curso = curso;
     }
@@ -86,15 +89,20 @@ public class CentroEducativo {
         Cuenta.cargaSucursalesBancarias(tmEEEESSSS);
         TablasCursos.cargaCursos(tmCC);
         TablasCursos.cargaCursosAsignaturas(tmCCASIGNA);
+        try {
+        	
         
-     
-    
+        File rutaPersonas3 = new File("C:\\ProyectoCentro\\Personas3.txt");
+    	lista =FuncionesFicheros.obtenerTreeMapDeArchivo(rutaPersonas3);
+        }catch(Exception e) {
+        	System.out.println(e.getMessage());
+        }
         
         
         System.out.println();
         boolean correcto = false;        
 
-        
+       /* 
         // OBJETOS CREADOS PARA PROBAR EL PROGRAMA.
         Profesor p = new Profesor(1500.0,10.0, "ES2400811152680006077615", "Nombre1", "Apellidos1","calle1","03202", 
                            "Elche", "54060067Q", "12/12/1985"); 
@@ -116,6 +124,9 @@ public class CentroEducativo {
         
         key = p.getApellidos() + ", " + p.getNombre();
         lista.put(key, p);
+        */
+        String key;
+        Profesor p = new Profesor();
         boolean salirMenu = false;
         int opcion= 0;
         boolean salirProfesor = false;
@@ -251,7 +262,7 @@ public class CentroEducativo {
 
         	        System.out.println("\nKEY: " + key);
         	        
-        	        if (lista.containsKey(key) != true) throw new Exception ("ERROR --> Profesor Inexistente.");
+        	        if (lista.containsKey(key) != true) throw new Exception ("ERROR --> Alumno Inexistente.");
         	       
         	            System.out.println (lista.get(key).toString());
         	   
@@ -542,10 +553,12 @@ public class CentroEducativo {
                     	System.out.println("Opcion seleccionada: Alta profesor");
                         profe = new Profesor(); // SE INSTANCIA UN OBJETO.
                         profe.nuevoProfesor();	// LLAMAMOS A LA FUNCION PARA AÑADIR LOS DATOS A PROFESOR
-                        key = p.getApellidos() + ", " + p.getNombre(); // SE CREA LA CLAVE CON LOS DATOS RECOGIDOS
+                        key = profe.getApellidos() + ", " + profe.getNombre(); // SE CREA LA CLAVE CON LOS DATOS RECOGIDOS
                         // COMPRUEBA SI EN PERSONAS EXISTEN ESTOS DATOS, SI EXISTEN SALTA UNA EXEPCION
                         if(!lista.containsKey(key)) {
                         	lista.put(key, profe);
+                        }else {
+                        	throw new Exception("El profesor existe.");
                         }
                         }catch(Exception e){
                         System.out.println("El profesor existe.");
@@ -778,8 +791,6 @@ public class CentroEducativo {
         	opcion=0;
         	try {
         		FuncionesFicheros.GuardarDatosPersonas(lista);
-        		File rutaPersonas3 = new File("C:\\ProyectoCentro\\Personas3.txt");
-        		FuncionesFicheros.obtenerTreeMapDeArchivo(rutaPersonas3);
         	}catch(IOException e) {
         		System.out.println("Error!! " +e.getMessage());
         	}

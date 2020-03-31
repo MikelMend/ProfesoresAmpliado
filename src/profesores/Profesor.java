@@ -15,7 +15,9 @@ public class Profesor extends Persona{
 
 	private TreeMap<String, String> tmAsignaturas;//TREEMAP DE LAS ASIGNATURAS IMPARTIDAS.
 
-    public Profesor() {}
+    public Profesor() {
+    	this.horasExtras = new int[12];
+    }
     
     
     public Profesor(double sueldoBase, double tipoIRPF, String cuentaIBAN, String nombre, String apellidos, String calle, String codigoPostal, String ciudad, String dni, String fechaNacimiento) {
