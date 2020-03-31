@@ -761,6 +761,9 @@ public class CentroEducativo {
         	break;
         case 4:
         	System.out.println("\n LISTADO DE NOMBRES DE PROFESORES");
+        	File personas = new File("C:\\ProyectoCentro\\Personas3.txt");
+        	
+        	if(!lista.isEmpty()) {
         	System.out.println("Curso Académico: " +getCurso());
         	System.out.println("LISTADO DE PROFESORES");
             System.out.println("APELLIDOS/NOMBRE");
@@ -769,7 +772,6 @@ public class CentroEducativo {
             
             while(it.hasNext()){		 //// HASNEXT DEVUELVE TRUE MIENTRAS QUEDEN MAS ELEMENTOS PARA LEER EN "it"
               key=(String) it.next();
-
                     Persona per = lista.get(key);  //PER QUE ES NULL ALMACENA  EL VALOR QUE RECOGE DE LA KEY PASADA
                 if(per instanceof Profesor){ // LOS COMPARA Y SI CUMPLE SE LE HACE UN CATCH
                     Profesor profe = (Profesor) per; // PROFE ALMACENA EL VALOR DE PER QUE RECOGIO LOS DATOS ANTERIORMENTE.
@@ -779,6 +781,10 @@ public class CentroEducativo {
                     System.out.println();
                 }
             }
+        	}else {
+        		System.out.println("El fichero está vacío!");
+        	}
+        	
         	break;
         case 5:
         	System.out.println("\n LISTADO DE NOMBRES DE ALUMNOS");
